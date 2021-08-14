@@ -1,28 +1,41 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <h1>Crea una nueva tarea</h1>
+
+    <div class="input-control">
+      <label>Tarea</label>
+      <input
+        type="text"
+        placeholder="Ingrese un nuevo Item"
+        v-model="nuevaActividad"
+      />
+      <button @click="agregarNuevoItem">Crear</button>
+    </div>
+
+    <h1>Lista</h1>
+
+    <ul>
+      <li v-for="(actividad, $i) in actividades" :key="$i">
+        {{ actividad }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
   name: "App",
-  components: {
-    HelloWorld,
+  data: () => ({
+    nuevaItems: "",
+    actividades: [],
+  }),
+  methods: {
+    agregarNuevoItem() {
+      this.actividades.push(this.nuevaItems);
+      this.nuevaItems = "";
+    },
   },
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style scoped></style>
